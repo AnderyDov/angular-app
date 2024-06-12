@@ -9,5 +9,10 @@ header {
 }
 
 .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     padding: var(--content-padding);
+    gap: 1rem;
 }
