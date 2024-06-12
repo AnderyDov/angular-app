@@ -1,26 +1,27 @@
 :host {
     display: flex;
+    gap: 1rem;
     align-items: center;
     justify-content: center;
 
     padding: var(--content-padding);
-    gap: 1rem;
 }
 
 .block {
+    cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
     padding: 1rem;
 
-    cursor: pointer;
-    transition: all 0.2s ease-out;
-
     color: beige;
-    border-radius: 4px;
 
     background: blueviolet;
+    border-radius: 4px;
+
+    transition: all 0.2s ease-out;
 }
 
 .block:hover {
