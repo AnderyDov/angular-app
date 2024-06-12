@@ -1,23 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HousingLocationComponent } from '../housing-location/housing-location.component';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
 @Component({
 	selector: 'app-home',
 	standalone: true,
-	imports: [CommonModule, HousingLocationComponent],
+	imports: [CommonModule, TranslocoPipe],
 	template: `
-		<div class="block" (click)="func()">Hello world</div>
-		<div>{{ lang ? 'RU' : 'EN' }}</div>
+		<div>{{ 'hello' | transloco }}</div>
+		<div class="block" (click)="changeLanguage()">Change</div>
+		<div>{{ activeLang == 'ru' ? 'RU' : 'EN' }}</div>
 	`,
 	styleUrl: './home.component.css',
 })
-export class HomeComponent {
-	constructor() {}
+export class HomeComponent implements OnInit {
+	activeLang!: string;
 
-	lang = true;
+	constructor(private translocoService: TranslocoService) {
+		translocoService.getActiveLang();
+	}
 
-	func() {
-		this.lang = !this.lang;
+	ngOnInit(): void {
+		this.activeLang = this.translocoService.getActiveLang();
+	}
+
+	changeLanguage() {
+		if (this.translocoService.getActiveLang() == 'ru') {
+			this.translocoService.setActiveLang('en');
+		} else {
+			this.translocoService.setActiveLang('ru');
+		}
+		this.activeLang = this.translocoService.getActiveLang();
 	}
 }
